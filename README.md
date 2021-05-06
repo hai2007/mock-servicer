@@ -3,7 +3,6 @@
 <p>
   <a href="https://hai2007.gitee.io/npm-downloads?interval=7&packages=mock-servicer"><img src="https://img.shields.io/npm/dm/mock-servicer.svg" alt="downloads"></a>
   <a href="https://packagephobia.now.sh/result?p=mock-servicer"><img src="https://packagephobia.now.sh/badge?p=mock-servicer" alt="install size"></a>
-  <a href="https://www.jsdelivr.com/package/npm/mock-servicer"><img src="https://data.jsdelivr.com/v1/package/npm/mock-servicer/badge" alt="CDN"></a>
   <a href="https://www.npmjs.com/package/mock-servicer"><img src="https://img.shields.io/npm/v/mock-servicer.svg" alt="Version"></a>
   <a href="https://github.com/hai2007/mock-servicer/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/mock-servicer.svg" alt="License"></a>
   <a href="https://github.com/hai2007/mock-servicer">
@@ -41,8 +40,15 @@ MockServicer({
       // 数据
       // 可以根据options来判断应该返回什么样的数据
       data: Mock.mock({
+
         // 这里可以借助mock的方法来生成模拟数据
         // 或者使用缓存数据
+        
+        // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+        'list|1-10': [{
+          // 属性 id 是一个自增数，起始值为 1，每次增 1
+          'id|+1': 1
+        }]
       })
       
     };

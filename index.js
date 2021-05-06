@@ -1,6 +1,6 @@
 /*!
  * MOCK数据服务器
- * https://github.com/hai2007/mock-server
+ * https://github.com/hai2007/mock-servicer
  *
  * author hai2007 < https://hai2007.gitee.io/sweethome >
  *
