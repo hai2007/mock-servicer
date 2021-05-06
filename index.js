@@ -35,9 +35,9 @@ module.exports = function (config) {
     response.writeHead(resultData.status, {
 
       // 设置跨域
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "X-Requested-With",
-      "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
+      "Access-Control-Allow-Origin": "*",// 允许的域
+      "Access-Control-Allow-Headers": "*",// 允许的header类型
+      "Access-Control-Allow-Methods": "*",// 允许的请求方法
 
       // 标记服务器名称
       "X-Powered-By": jsonfile.name + " " + jsonfile.version,
