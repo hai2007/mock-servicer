@@ -9,27 +9,53 @@
  */
 
 const http = require('http');
-const fs = require('fs');
 const log = require('@hai2007/nodejs').log;
+const fs = require('fs');
+const path = require('path');
+const Mock = require('mockjs')
+
+const jsonfile = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json')));
 
 module.exports = function (config) {
 
-  const port = config.port || 8080; // 端口号
-  const basePath = config.contentBase || process.cwd();// 根路径
+  const port = 'port' in config ? config.port : 8080; // 端口号
 
-  let server = http.createServer(function (request, response) {
+  http.createServer(function (request, response) {
 
-    response.writeHead('200', {
+    let resultData = config.handler({
+
+      // 请求方法
+      method: request.method,
+
+      // url
+      url: (request.url + "").replace(/\?[^?]+$/, '')
+
+    }, Mock);
+
+    response.writeHead(resultData.status, {
+
+      // 设置跨域
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "X-Requested-With",
+      "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
+
+      // 标记服务器名称
+      "X-Powered-By": jsonfile.name + " " + jsonfile.version,
+
+      // 响应内容类型
+      "Content-Type": "application/json;charset=utf-8"
 
     });
 
-    response.write('响应的内容');
+    response.write(require('@hai2007/tool').isString(resultData.data) ? resultData.data : JSON.stringify(resultData.data));
 
     response.end();
 
-  });
+  })
 
-  server.listen(port);
-  log('Server running on port:' + port);
+    // 启动监听
+    .listen(port);
+
+  log(jsonfile.name + ' running on port:' + port);
 
 };

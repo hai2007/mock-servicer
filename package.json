@@ -1,11 +1,8 @@
 {
   "name": "mock-servicer",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "用于提供模拟数据的node服务器。",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hai2007/mock-servicer.git"
@@ -22,6 +19,7 @@
   "homepage": "https://github.com/hai2007/mock-servicer#readme",
   "dependencies": {
     "@hai2007/nodejs": "^1.0.0",
-    "@hai2007/tool": "^0.6.6"
+    "@hai2007/tool": "^0.6.6",
+    "mockjs": "^1.1.0"
   }
 }
