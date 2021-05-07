@@ -122,7 +122,8 @@ module.exports = function (config) {
         // 这样的目的是为了方便二次开发
         else {
           responseCode = "404";
-          responseData = JSON.stringify(responseFileList(filePath));
+          responseData = ('template404' in config ? config.template404 : require('./tool/template404'))(responseFileList(filePath));
+          contentType = "text/html";
         }
 
       }

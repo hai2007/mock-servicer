@@ -7,6 +7,11 @@ MockServicer({
 
   contentBase:'./',
 
-  mockBase:'./mock'
+  mockBase:'./mock',
+
+  // template404:function(list){
+  //   console.log(list);
+  //   return "404";
+  // }
 
 });

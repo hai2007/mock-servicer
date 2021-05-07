@@ -26,14 +26,20 @@ const MockServicer = require('mock-servicer');
 
 MockServicer({
 
-  // 请求端口，默认8080
+  // 请求端口，可选，默认8080
   port: 8080,
 
-  // 服务器根地址
+  // 服务器根地址，可选，默认当前路径
   contentBase:'./',
 
-  // mock数据缓存根地址
-  mockBase:'./mock'
+  // mock数据缓存根地址，可选，默认当前路径
+  mockBase:'./mock',
+
+  // 404的提示界面，可选
+  template404:function(list){
+    // 返回当前路径下文件列表
+    return template;
+  }
 
 });
 ```
@@ -75,8 +81,8 @@ $.ajax({
 ```js
 data: `{
   "key1": "value1",
-  "key2": "value 2",
-  "key3": "value3中文"
+  "key2": "value2",
+  "key3": "value3"
 }`
 ```
 
@@ -94,7 +100,7 @@ data: `Mock.mock({
 
 ### 作为普通的数据服务器
 
-除了上面特殊情况的交互外，你还可以直接服务位于```服务器根地址 contentBase```下的文件，如果访问的地址有误，请求返回```404```并列举出当前目录下的文件路径列表。
+除了上面特殊情况的交互外，你还可以直接访问位于```服务器根地址 contentBase```下的文件。
 
 开源协议
 ---------------------------------------
