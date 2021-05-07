@@ -1,6 +1,6 @@
 {
   "name": "mock-servicer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "用于提供模拟数据的node服务器。",
   "main": "index.js",
   "scripts": {

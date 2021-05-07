@@ -82,12 +82,22 @@ module.exports = function (config) {
       }
 
       // 查询
-      // localhost:8080/delete?url=XXX&method=XXX
+      // localhost:8080/query?url=XXX&method=XXX
       else if (preUrl == 'query') {
 
         let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
 
-        responseData = JSON.stringify(require(datapath)(require('mockjs')));
+        if (fs.existsSync(datapath)) {
+          try {
+            responseData = JSON.stringify(require(datapath)(require('mockjs')));
+          } catch (e) {
+            responseCode = "500";
+            responseData = "" + e;
+            contentType = 'text/plain';
+          }
+        } else {
+          responseCode = "404";
+        }
 
       }
 
