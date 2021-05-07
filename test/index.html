@@ -17,18 +17,45 @@
 
   <script>
 
+    // 新增或更新
+    // $.ajax({
+    //   url: 'http://127.0.0.1:30000/update?url=userinfo.do&method=GET',
+    //   type: "POST",
+    // // 普通的数据
+    //   data: JSON.stringify({
+    //     "key1": "value1",
+    //     "key2": "value 2",
+    //     "key3": "value3中文"
+    //   }),
+    //   // headers: {
+    //   //   'Content-Type': 'application/json;charset=utf8'
+    //   // },
+    // });
+
     $.ajax({
-      url: 'http://127.0.0.1:30000/?position=data/user/getinfo.do&info=yourinfo',
+      url: 'http://127.0.0.1:30000/update?url=userinfo.do&method=GET',
       type: "POST",
-      data: JSON.stringify({
-        "key1": "value1",
-        "key2": "value 2",
-        "key3": "value3中文"
-      }),
-      // headers: {
-      //   'Content-Type': 'application/json;charset=utf8'
-      // },
-    })
+      // mock数据
+      data: `Mock.mock({
+      // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+        'list|1-10': [{
+          // 属性 id 是一个自增数，起始值为 1，每次增 1
+          'id|+1': 1
+        }]
+      })`
+    });
+
+    // 删除
+    // $.ajax({
+    //   url: 'http://127.0.0.1:30000/delete?url=userinfo.do&method=GET',
+    //   type: "POST"
+    // });
+
+    // 查询
+    $.ajax({
+      url: 'http://127.0.0.1:30000/query?url=userinfo.do&method=GET',
+      type: "POST"
+    });
 
   </script>
 

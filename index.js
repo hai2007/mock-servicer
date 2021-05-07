@@ -15,13 +15,15 @@ const path = require('path');
 const url = require('url');
 const mineTypes = require('./mime.types.js');
 const responseFileList = require('./tool/responseFileList.js');
+const urlToString = require('./tool/urlToString');
 
 const jsonfile = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json')));
 
 module.exports = function (config) {
 
   const port = 'port' in config ? config.port : 8080; // 端口号
-  const basePath = config.contentBase || process.cwd();// 根路径
+  const basePath = fullPath(config.contentBase || "./", process.cwd());// 根路径
+  const mockBasePath = fullPath(config.mockBase || "./", process.cwd());// 根路径
 
   http.createServer(function (request, response) {
 
@@ -54,17 +56,38 @@ module.exports = function (config) {
       let responseData = JSON.stringify(options);
 
       // 新增或更新
+      // POST localhost:8080/update?url=XXX&method=XXX
       if (preUrl == 'update') {
+
+        let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
+
+        // 写入内容
+        fs.writeFileSync(datapath, `module.exports=function(Mock){
+  return ${options.value};
+};`);
 
       }
 
       // 删除
+      // localhost:8080/delete?url=XXX&method=XXX
       else if (preUrl == 'delete') {
+
+        let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
+
+        // 删除内容
+        if (fs.existsSync(datapath)) {
+          fs.unlinkSync(datapath);
+        }
 
       }
 
       // 查询
+      // localhost:8080/delete?url=XXX&method=XXX
       else if (preUrl == 'query') {
+
+        let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
+
+        responseData = JSON.stringify(require(datapath)(require('mockjs')));
 
       }
 

@@ -1,6 +1,6 @@
 {
   "name": "mock-servicer",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "用于提供模拟数据的node服务器。",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   "dependencies": {
     "@hai2007/nodejs": "^1.0.0",
     "@hai2007/tool": "^0.6.6",
+    "hash-sum": "^2.0.0",
     "mockjs": "^1.1.0"
   }
 }
