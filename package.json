@@ -1,8 +1,12 @@
 {
   "name": "mock-servicer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "用于提供模拟数据的node服务器。",
   "main": "index.js",
+  "scripts": {
+    "test": "hai2007_nodejs -s",
+    "debug": "echo 'chrome://inspect/#devices' && node  --inspect ./test/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hai2007/mock-servicer.git"

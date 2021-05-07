@@ -19,7 +19,7 @@
 npm install mock-servicer
 ```
 
-安装好了以后，在需要的地方引入：
+安装好了以后，引入并启动即可：
 
 ```js
 const MockServicer = require('mock-servicer');
@@ -27,33 +27,10 @@ const MockServicer = require('mock-servicer');
 MockServicer({
 
   // 请求端口，默认8080
-  port: 30000,
+  port: 8080,
 
-  // 数据处理方法
-  handler: function (options, Mock) {
-
-    return {
-
-      // 状态码
-      status: 200,
-
-      // 数据
-      // 可以根据options来判断应该返回什么样的数据
-      data: Mock.mock({
-
-        // 这里可以借助mock的方法来生成模拟数据
-        // 或者使用缓存数据
-        
-        // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-        'list|1-10': [{
-          // 属性 id 是一个自增数，起始值为 1，每次增 1
-          'id|+1': 1
-        }]
-      })
-      
-    };
-
-  }
+  // 服务器跟地址
+  contentBase:'./'
 
 });
 ```

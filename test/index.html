@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mock Servicer | 请求测试界面</title>
+  <script src="./jquery-3.1.1.js"></script>
+</head>
+
+<body>
+
+  <h2>
+    Tips：测试界面，打开F12查看！
+  </h2>
+
+  <script>
+
+    $.ajax({
+      url: 'http://127.0.0.1:30000/?position=data/user/getinfo.do&info=yourinfo',
+      type: "POST",
+      data: JSON.stringify({
+        "key1": "value1",
+        "key2": "value 2",
+        "key3": "value3中文"
+      }),
+      // headers: {
+      //   'Content-Type': 'application/json;charset=utf8'
+      // },
+    })
+
+  </script>
+
+</body>
+
+</html>
