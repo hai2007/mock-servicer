@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'Mock Servicer';
+
+const hai2007_nodejs = require('@hai2007/nodejs');
+const hai2007_tool = require('@hai2007/tool');
+const bootstrap = require('./bootstrap');
+
+// 命令行传递的参数
+const parsed = hai2007_nodejs.option({}, process.argv);
+
+// 如果添加了配置文件，直接根据配置文件运行
+if (hai2007_tool.isArray(parsed.config)) {
+  if (parsed.config.length < 1) {
+
+    // 否则就使用默认的配置文件
+    bootstrap(hai2007_nodejs.fullPath('mock-servicer.config.js'));
+
+  } else {
+
+    // 启动配置文件运行
+    bootstrap(hai2007_nodejs.fullPath(parsed.config[0]));
+  }
+} else {
+
+  // 如果没有配置文件
+  hai2007_nodejs.error('Operations not currently supported.');
+
+}

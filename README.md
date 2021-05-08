@@ -39,6 +39,23 @@ MockServicer({
   template404:function(list){
     // 返回当前路径下文件列表
     return template;
+  },
+
+  // 自定义处理，可选
+  handler:function(options){
+
+    return {
+      code:"",// 响应码，可选，默认200
+      data:"",// 数据，必输
+      type:""// 数据类型，可选，默认application/json
+    };
+
+  },
+
+  // 请求拦截，可选，默认全部同意
+  intercept:function(options){
+      // 如果返回false，服务器会拒绝这次请求
+      return true|false;
   }
 
 });
@@ -76,6 +93,16 @@ $.ajax({
 });
 ```
 
+- 自定义处理
+
+```js
+$.ajax({
+  url: 'http://127.0.0.1:8080/handler'
+});
+```
+
+当前，这意味着启动服务器时```handler```配置项是必须的。
+
 上面的```需要保存的数据```可以是一个普通的JSON字符串，比如：
 
 ```js
@@ -101,6 +128,26 @@ data: `Mock.mock({
 ### 作为普通的数据服务器
 
 除了上面特殊情况的交互外，你还可以直接访问位于```服务器根地址 contentBase```下的文件。
+
+## 命令行启动
+
+除了作为一个node包使用外，还可以在安装以后使用命令行启动：
+
+```bash
+mock-servicer --config ./mock-servicer.config.js
+```
+
+需要指定一个配置文件用来规定如何启动，配置文件格式如下：
+
+```js
+// mock-servicer.config.js
+module.exports = {
+
+  port: 8080,
+  // 和直接作为包使用的时候可配置参数的一致的
+
+};
+```
 
 开源协议
 ---------------------------------------
