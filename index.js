@@ -110,6 +110,7 @@ module.exports = function (config) {
 
             if (fs.existsSync(datapath)) {
               responseData = (fs.readFileSync(datapath, 'utf-8') + "").replace(/^module\.exports=function\(Mock\)\{return /, '').replace(/;\};$/, '');
+              contentType = 'text/plain';
             } else {
               responseCode = "404";
             }
