@@ -29,7 +29,7 @@ module.exports = function (config) {
 
     let contentType = 'application/json';
     let responseCode = '200';
-    let responseData = "";
+    let responseData = "{}";
 
     let urlObject = url.parse(request.url);
 
