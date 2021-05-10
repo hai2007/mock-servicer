@@ -69,9 +69,9 @@ module.exports = function (config) {
             let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
 
             // 写入内容
-            fs.writeFileSync(datapath, `module.exports=function(Mock){
-  return ${options.value};
-};`);
+            fs.writeFileSync(datapath, `module.exports=function(Mock){return ${options.value};};`, {
+              encoding: 'utf8'
+            });
 
           }
 
@@ -96,6 +96,20 @@ module.exports = function (config) {
 
             if (fs.existsSync(datapath)) {
               responseData = JSON.stringify(require(datapath)(require('mockjs')));
+            } else {
+              responseCode = "404";
+            }
+
+          }
+
+          // 原始查询
+          // localhost:8080/oralquery?url=XXX&method=XXX
+          else if (preUrl == 'oralquery') {
+
+            let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
+
+            if (fs.existsSync(datapath)) {
+              responseData = (fs.readFileSync(datapath, 'utf-8') + "").replace(/^module\.exports=function\(Mock\)\{return /, '').replace(/;\};$/, '');
             } else {
               responseCode = "404";
             }

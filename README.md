@@ -93,6 +93,14 @@ $.ajax({
 });
 ```
 
+- 原始查询
+
+```js
+$.ajax({
+  url: 'http://127.0.0.1:8080/oralquery?url=XXX&method=XXX'
+});
+```
+
 - 自定义处理
 
 ```js
