@@ -96,6 +96,9 @@ module.exports = function (config) {
 
             if (fs.existsSync(datapath)) {
               responseData = JSON.stringify(require(datapath)(require('mockjs')));
+
+              // 删除缓存
+              delete require.cache[require.resolve(datapath)];
             } else {
               responseCode = "404";
             }
