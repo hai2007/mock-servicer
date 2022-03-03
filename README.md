@@ -13,6 +13,8 @@
 ## Issues
 使用的时候遇到任何问题或有好的建议，请点击进入[issue](https://github.com/hai2007/mock-servicer/issues)！
 
+> 基于此项目开发的[mock-manager](https://github.com/hai2007/mock-manager)是一个更简单的提供模拟数据的“新增”、“删除”、“更新”和“使用”于一体的项目，使用起来非常简单，推荐使用此项目哦~
+
 ## 如何使用？
 
 ```
@@ -69,6 +71,10 @@ MockServicer({
 
 - 新增或更新
 
+也就是在仓库中新增或修改已经有的模拟数据
+
+> 其中url用于指定模拟数据名称，method用于指定模拟数据请求方法，总之，url和method唯一确定了哪一方模拟数据（主要是考虑到实际项目的同一个url可能会使用不同的method实现不同的功能），下同。
+
 ```js
 $.ajax({
   url: 'http://127.0.0.1:8080/update?url=XXX&method=XXX',
@@ -79,6 +85,8 @@ $.ajax({
 
 - 删除
 
+删除已经存在的模拟数据
+
 ```js
 $.ajax({
   url: 'http://127.0.0.1:8080/delete?url=XXX&method=XXX'
@@ -87,13 +95,27 @@ $.ajax({
 
 - 查询
 
+如果需要使用这份模拟数据，可以这样请求，返回的是mock运行后的结果而不是你新增的原始代码
+
 ```js
 $.ajax({
   url: 'http://127.0.0.1:8080/query?url=XXX&method=XXX'
 });
 ```
 
+- Mock查询
+
+和```查询```类似，只是这里直接使用```XXX```指定请求的模拟数据文件名称
+
+```js
+$.ajax({
+  url: 'http://127.0.0.1:8080/mock?XXX'
+});
+```
+
 - 原始查询
+
+有时候，我们可能希望开发一个平台来管理我们的模拟数据，这个方法就可以返回原始代码，方便我们在线维护（比如这个项目：[mock-manager](https://github.com/hai2007/mock-manager)）
 
 ```js
 $.ajax({
@@ -102,6 +124,8 @@ $.ajax({
 ```
 
 - 自定义处理
+
+对于一些特殊情况，我们无法考虑那么多，比如访问权限等，这时候就可以自定义处理规则了
 
 ```js
 $.ajax({
@@ -161,4 +185,4 @@ module.exports = {
 ---------------------------------------
 [MIT](https://github.com/hai2007/mock-servicer/blob/master/LICENSE)
 
-Copyright (c) 2021 [hai2007](https://hai2007.gitee.io/sweethome/) 走一步，再走一步。
+Copyright (c) 2021-2022 [hai2007](https://hai2007.gitee.io/sweethome/) 走一步，再走一步。

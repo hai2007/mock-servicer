@@ -1,4 +1,4 @@
-const hai2007_nodejs = require('@hai2007/nodejs');
+const nodejs = require('@hai2007/nodejs');
 const fs = require('fs');
 
 module.exports = function (configUrl, taskName) {
@@ -12,6 +12,6 @@ module.exports = function (configUrl, taskName) {
     require('../index')(configFile);
 
   } else {
-    hai2007_nodejs.error('No config file:' + configUrl);
+    nodejs.error('No config file:' + configUrl);
   }
 };

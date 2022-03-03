@@ -4,7 +4,7 @@
  *
  * author hai2007 < https://hai2007.gitee.io/sweethome >
  *
- * Copyright (c) 2021 hai2007 走一步，再走一步。
+ * Copyright (c) 2021-2022 hai2007 走一步，再走一步。
  * Released under the MIT license
  */
 
@@ -93,6 +93,23 @@ module.exports = function (config) {
           else if (preUrl == 'query') {
 
             let datapath = fullPath("./mock-" + urlToString(options.query.url, options.query.method) + ".js", mockBasePath);
+
+            if (fs.existsSync(datapath)) {
+              responseData = JSON.stringify(require(datapath)(require('mockjs')));
+
+              // 删除缓存
+              delete require.cache[require.resolve(datapath)];
+            } else {
+              responseCode = "404";
+            }
+
+          }
+
+          // Mock查询
+          // localhost:8080/mock?XXX
+          else if (preUrl == 'mock') {
+
+            let datapath = fullPath("./" + urlObject.query + ".js", mockBasePath);
 
             if (fs.existsSync(datapath)) {
               responseData = JSON.stringify(require(datapath)(require('mockjs')));
